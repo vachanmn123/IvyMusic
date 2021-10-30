@@ -1,0 +1,7 @@
+{
+	"prefix": "PREFIX",
+	"token": "TOKEN",
+	"owner": "OWNER ID",
+	"client_id": "BOT ID",
+	"test_guild_id": "TEST GUILD ID"
+}
