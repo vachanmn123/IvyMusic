@@ -69,12 +69,14 @@ client.distube = new DisTube.default(client, {
 	leaveOnStop: true,
 	plugins: [new SoundCloudPlugin.default(), new SpotifyPlugin.default()],
 	ytdlOptions: {
+		quality: "highestaudio",
+		
 		filter: "audioonly",
 		quality: "highestaudio",
 		audioBitrate: 240000,
 		averageBitrate: 240000,
 		audioQuality: 'AUDIO_QUALITY_MEDIUM',
-		
+
 	}
 })
 
