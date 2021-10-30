@@ -11,6 +11,9 @@ const { Client, Collection, Intents } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const { token, client_id, test_guild_id } = require("./config.json");
+const DisTube = require('distube')
+const SoundCloudPlugin = require('@distube/soundcloud')
+const SpotifyPlugin = require('@distube/spotify')
 
 /**
  * From v13, specifying the intents is compulsory.
@@ -18,8 +21,9 @@ const { token, client_id, test_guild_id } = require("./config.json");
  * @description Main Application Client */
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
 });
+
 
 /**********************************************************************/
 // Below we will be making an event handler!
@@ -56,6 +60,16 @@ client.selectCommands = new Collection();
 client.contextCommands = new Collection();
 client.cooldowns = new Collection();
 client.triggers = new Collection();
+client.distube = new DisTube.default(client, {
+	searchSongs: 1,
+	searchCooldown: 30,
+	leaveOnEmpty: true,
+	emptyCooldown: 0,
+	leaveOnFinish: true,
+	leaveOnStop: true,
+	plugins: [new SoundCloudPlugin.default(), new SpotifyPlugin.default()],
+})
+
 
 /**********************************************************************/
 // Registration of Message-Based Commands
@@ -226,6 +240,33 @@ for (const folder of triggerFolders) {
 		client.triggers.set(trigger.name, trigger);
 	}
 }
+
+// Distube initialization.
+const status = queue => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(", ") || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode === 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``
+client.distube
+    .on("playSong", (queue, song) => queue.textChannel.send(
+        `Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}\n${status(queue)}`
+    ))
+    .on("addSong", (queue, song) => queue.textChannel.send(
+        `Added ${song.name} - \`${song.formattedDuration}\` to the queue by ${song.user}`
+    ))
+    .on("addList", (queue, playlist) => queue.textChannel.send(
+        `Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to queue\n${status(queue)}`
+    ))
+    // DisTubeOptions.searchSongs = true
+    .on("searchResult", (message, result) => {
+        let i = 0
+        message.channel.send(`**Choose an option from below**\n${result.map(song => `**${++i}**. ${song.name} - \`${song.formattedDuration}\``).join("\n")}\n*Enter anything else or wait 60 seconds to cancel*`)
+    })
+    // DisTubeOptions.searchSongs = true
+    .on("searchCancel", message => message.channel.send(`Searching canceled`))
+    .on("error", (channel, e) => {
+        channel.send(`An error encountered: ${e}`)
+        console.error(e)
+    })
+    .on("empty", channel => channel.send("Voice channel is empty! Leaving the channel..."))
+    .on("searchNoResult", message => message.channel.send(`No result found!`))
+    .on("finish", queue => queue.textChannel.send("Finished!"))
 
 // Login into your client application with bot's token.
 
