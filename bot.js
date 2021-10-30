@@ -92,6 +92,7 @@ const commandFolders = fs.readdirSync("./commands");
 // Loop through all files and store commands in commands collection.
 
 for (const folder of commandFolders) {
+	if (folder==".DS_Store") {continue;}
 	const commandFiles = fs
 		.readdirSync(`./commands/${folder}`)
 		.filter((file) => file.endsWith(".js"));
@@ -137,10 +138,12 @@ const contextMenus = fs.readdirSync("./interactions/context-menus");
 // Loop through all files and store slash-commands in slashCommands collection.
 
 for (const folder of contextMenus) {
+	if (folder==".DS_Store") {continue;}
 	const files = fs
 		.readdirSync(`./interactions/context-menus/${folder}`)
 		.filter((file) => file.endsWith(".js"));
 	for (const file of files) {
+		if (folder==".DS_Store") {continue;}
 		const menu = require(`./interactions/context-menus/${folder}/${file}`);
 		const keyName = `${folder.toUpperCase()} ${menu.data.name}`;
 		client.contextCommands.set(keyName, menu);
