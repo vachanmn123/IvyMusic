@@ -13,6 +13,9 @@ module.exports = {
 	 * @param {Object} client Main Application Client
 	 */
 	execute(client) {
+		client.user.setActivity("music for people", {
+			type: "PLAYING",
+		});
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 	},
 };
