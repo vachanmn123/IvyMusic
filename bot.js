@@ -10,7 +10,7 @@ const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { token, client_id, test_guild_id } = require("./config.json");
+const { token, client_id, test_guild_id, owner } = require("./config.json");
 const DisTube = require('distube')
 const SoundCloudPlugin = require('@distube/soundcloud')
 const SpotifyPlugin = require('@distube/spotify')
@@ -54,6 +54,8 @@ for (const file of eventFiles) {
 // Define Collection of Commands, Slash Commands and cooldowns
 
 client.commands = new Collection();
+client.version = "v1.0.0"
+client.ownerID = owner
 client.slashCommands = new Collection();
 client.buttonCommands = new Collection();
 client.selectCommands = new Collection();
@@ -69,8 +71,6 @@ client.distube = new DisTube.default(client, {
 	leaveOnStop: false,
 	plugins: [new SoundCloudPlugin.default(), new SpotifyPlugin.default()],
 	ytdlOptions: {
-		quality: "highestaudio",
-		
 		filter: "audioonly",
 		quality: "highestaudio",
 		audioBitrate: 240000,
@@ -94,7 +94,7 @@ const commandFolders = fs.readdirSync("./commands");
 // Loop through all files and store commands in commands collection.
 
 for (const folder of commandFolders) {
-	if (folder==".DS_Store") {continue;}
+	if (folder===".DS_Store") {continue;}
 	const commandFiles = fs
 		.readdirSync(`./commands/${folder}`)
 		.filter((file) => file.endsWith(".js"));
@@ -140,12 +140,12 @@ const contextMenus = fs.readdirSync("./interactions/context-menus");
 // Loop through all files and store slash-commands in slashCommands collection.
 
 for (const folder of contextMenus) {
-	if (folder==".DS_Store") {continue;}
+	if (folder===".DS_Store") {continue;}
 	const files = fs
 		.readdirSync(`./interactions/context-menus/${folder}`)
 		.filter((file) => file.endsWith(".js"));
 	for (const file of files) {
-		if (folder==".DS_Store") {continue;}
+		if (folder===".DS_Store") {continue;}
 		const menu = require(`./interactions/context-menus/${folder}/${file}`);
 		const keyName = `${folder.toUpperCase()} ${menu.data.name}`;
 		client.contextCommands.set(keyName, menu);
@@ -260,7 +260,7 @@ const distubeEventFiles = fs
 	.filter((file) => file.endsWith(".js"));
 
 // Loop through all files and execute the event when it is actually emmited.
-const status = queue => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(", ") || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode === 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``
+// const status = queue => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(", ") || "Off"}\` | Loop: \`${queue.repeatMode ? queue.repeatMode === 2 ? "All Queue" : "This Song" : "Off"}\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``
 for (const file of distubeEventFiles) {
 	const event = require(`./events/distubeEvents/${file}`);
 	if (event) {

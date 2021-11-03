@@ -3,6 +3,7 @@ module.exports = {
     description: "Add filters to the playing song",
     usage: "filters <filter>",
     guildOnly: true,
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN

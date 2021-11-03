@@ -5,6 +5,7 @@ module.exports = {
     description: "Play a song",
     usage: "play <song name>",
     guildOnly: true,
+    category: "music",
 
 	/**
 	 * @description Executes when the command is called by command handler.

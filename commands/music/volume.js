@@ -3,6 +3,7 @@ module.exports = {
     description: "Set the volume of the player",
     usage: "volume <volume>",
     guildOnly: true,
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN

@@ -4,6 +4,7 @@ module.exports = {
     usage: "repeat <off/song/queue>",
     guildOnly: true,
     aliases: ["loop"],
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN

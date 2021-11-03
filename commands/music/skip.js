@@ -3,6 +3,7 @@ module.exports = {
     description: "Skip the playing song",
     usage: "skip",
     guildOnly: true,
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN

@@ -3,6 +3,7 @@ module.exports = {
     description: "seek to a position in the playing song",
     usage: "seek <position>",
     guildOnly: true,
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN

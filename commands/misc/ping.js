@@ -1,3 +1,5 @@
+const {MessageEmbed} = require('discord.js');
+
 /**
  * @file Sample ping command
  * @author Naman Vrati
@@ -6,6 +8,8 @@
 
 module.exports = {
 	name: "ping",
+	description: "Pong!",
+	category: "misc",
 
 	/** You need to uncomment below properties if you need them. */
 	//description: 'Ping!',
@@ -21,6 +25,12 @@ module.exports = {
 	 */
 
 	execute(message, args) {
-		message.channel.send({ content: "Pong." });
+		embed = new MessageEmbed()
+			.setColor('#0099ff')
+			.setTitle('Pong!')
+			.setDescription(`🏓Latency is ${Date.now() - message.createdTimestamp}ms.`)
+			.addField("API Latency", `${message.client.ws.ping}ms`, true)
+			.setTimestamp();
+		message.channel.send({ embeds: [embed] });
 	},
 };

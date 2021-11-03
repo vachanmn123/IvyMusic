@@ -3,6 +3,7 @@ module.exports = {
     description: "Plays the previous song",
     usage: "previous",
     guildOnly: true,
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN

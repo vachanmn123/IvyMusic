@@ -12,6 +12,7 @@ module.exports = {
 	description: "Reloads a command",
 	args: true,
 	ownerOnly: true,
+	category: "owner",
 
 	/**
 	 * @description Executes when the command is called by command handler.

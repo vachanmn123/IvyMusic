@@ -1,6 +1,7 @@
 module.exports = {
 	name: "autoplay",
     description: "Turn on/off Autoplay",
+    category: "music",
     usage: "autoplay",
     guildOnly: true,
 	/**

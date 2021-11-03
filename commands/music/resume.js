@@ -3,6 +3,7 @@ module.exports = {
     description: "Resume the paused song",
     usage: "resume",
     guildOnly: true,
+    category: "music",
 	/**
 	 * @description Executes when the command is called by command handler.
 	 * @author Vachan MN
