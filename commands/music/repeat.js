@@ -1,3 +1,5 @@
+const {MessageEmbed} = require('discord.js');
+
 module.exports = {
 	name: "repeat",
     description: "Select the repeat pattern",
@@ -30,6 +32,12 @@ module.exports = {
         }
         mode = queue.setRepeatMode(mode)
         mode = mode ? mode === 2 ? "Repeat queue" : "Repeat song" : "Off"
-        message.channel.send(`Set repeat mode to \`${mode}\``)
+		const emb = new MessageEmbed()
+		  .setColor("0x009910")
+		  .setTitle("Repeat")
+		  .setDescription(`Repeat mode is set to ${mode}`)
+		  .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
+		  .setTimestamp()
+		message.channel.send({ embeds: [emb] })
 	},
 };

@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
 	name: "resume",
     description: "Resume the paused song",
@@ -16,6 +18,12 @@ module.exports = {
         const queue = client.distube.getQueue(message)
         if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
         queue.resume()
-        message.channel.send("Resumed the song for you :)")
+		const emb = new MessageEmbed()
+		  .setColor("#00ff00")
+      .setTitle("Resumed")
+      .setDescription(`Resumed the paused song`)
+      .setFooter(`Requested by ${message.author.tag}`)
+      .setTimestamp()
+		message.channel.send({embeds: [emb]})
 	},
 };

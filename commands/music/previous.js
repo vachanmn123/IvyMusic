@@ -16,8 +16,7 @@ module.exports = {
         const queue = client.distube.getQueue(message)
         if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
         try {
-            const song = queue.previous()
-            message.channel.send(`Now playing:\n${song.name}`)
+            queue.previous()
         } catch (e) {
             message.channel.send(`${e}`)
         }

@@ -21,6 +21,6 @@ const { MessageEmbed } = require('discord.js');
             .setDescription(`Finished playing ${queue.songs[0].title}`)
             .setThumbnail(queue.songs[0].thumbnail)
             .setTimestamp();
-        queue.textChannel.send(emb);
+        queue.textChannel.send({embeds: [emb]});
 	},
 };

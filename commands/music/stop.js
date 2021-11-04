@@ -1,3 +1,5 @@
+const {MessageEmbed} = require('discord.js');
+
 module.exports = {
 	name: "stop",
     description: "Stop the playing song",
@@ -15,6 +17,10 @@ module.exports = {
         const queue = message.client.distube.getQueue(message);
         if (!queue) return message.channel.send(`There is nothing in the queue right now!`);
         queue.stop();
-        message.channel.send(`Stopped!`);
+				const emb = new MessageEmbed()
+					.setTitle("Stopped")
+		      .setColor("#ff0000")
+		      .setDescription(`Stopped the playing song`);
+				message.channel.send({embeds: [emb]});
 	},
 };

@@ -1,3 +1,5 @@
+const {MessageEmbed} = require('discord.js');
+
 module.exports = {
 	name: "seek",
     description: "seek to a position in the playing song",
@@ -19,6 +21,12 @@ module.exports = {
         const time = Number(args[0])
         if (isNaN(time)) return message.channel.send(`Please enter a valid number!`)
         queue.seek(time)
-        message.channel.send(`Seeked to ${time}!`)
+		const emb = new MessageEmbed()
+		  .setColor("0x009910")
+		  .setTitle("Seeked to position!")
+		  .setDescription(`Seeked to position ${time} seconds!`)
+		  .setFooter(`Requested by ${message.author.tag}`)
+		  .setTimestamp();
+		message.channel.send({embeds: [emb]});
 	},
 };

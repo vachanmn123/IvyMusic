@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
 	name: "autoplay",
     description: "Turn on/off Autoplay",
@@ -17,7 +19,13 @@ module.exports = {
         if (!queue) return message.channel.send(`There is nothing in the queue right now!`)
         try {
             const autoplay = queue.toggleAutoplay()
-            message.channel.send(`AutoPlay: \`${autoplay ? "On" : "Off"}\``)
+					const emb = new MessageEmbed()
+						.setColor("0x0099ff")
+					  .setTitle("Autoplay")
+					  .setDescription(`Autoplay is now \`${autoplay ? "enabled" : "disabled"}\``)
+					  .setFooter(`Requested by ${message.author.tag}`)
+					  .setTimestamp()
+					message.channel.send({ embeds: [emb] });
         } catch (e) {
             message.channel.send(`${e}`)
         }

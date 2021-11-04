@@ -264,7 +264,7 @@ const distubeEventFiles = fs
 for (const file of distubeEventFiles) {
 	const event = require(`./events/distubeEvents/${file}`);
 	if (event) {
-		client.distube.once(event.name, (...args) => event.execute(...args, client));
+		client.distube.on(event.name, (...args) => event.execute(...args, client));
 	} else {
 		client.distube.on(
 			event.name,

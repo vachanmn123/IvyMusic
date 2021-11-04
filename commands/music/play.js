@@ -1,5 +1,3 @@
-const DisTube = require('distube')
-
 module.exports = {
 	name: "play",
     description: "Play a song",
@@ -20,6 +18,7 @@ module.exports = {
         if (!message.member.voice.channel) return message.reply('YOU ARENT IN A VC!')
         if (!searchString) return message.reply('Please enter the search string or url')
         try {
+					  message.channel.sendTyping();
             distube.play(message, args.join(' '));
         } catch (e) {
             return message.reply(e)

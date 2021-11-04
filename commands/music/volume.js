@@ -1,3 +1,5 @@
+const {MessageEmbed} = require('discord.js');
+
 module.exports = {
 	name: "volume",
     description: "Set the volume of the player",
@@ -18,6 +20,12 @@ module.exports = {
         const volume = parseInt(args[0])
         if (isNaN(volume)) return message.channel.send(`Please enter a valid number!`)
         queue.setVolume(volume)
-        message.channel.send(`Volume set to \`${volume}\``)
+		const emb = new MessageEmbed()
+		  .setColor('#0099ff')
+		  .setTitle('Volume')
+		  .setDescription(`Volume set to ${volume}`)
+		  .setFooter(`Requested by ${message.author.username}`)
+		  .setTimestamp()
+		message.channel.send({embeds: [emb]})
 	},
 };

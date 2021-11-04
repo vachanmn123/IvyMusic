@@ -1,5 +1,3 @@
-const { MessageEmbed } = require('discord.js');
-
 /**
  * @file disTube search done event.
  * @author Vachan MN
@@ -13,8 +11,9 @@ const { MessageEmbed } = require('discord.js');
 	 * @description Executes the block of code when the Search is completed
      * @param {Object} message The users search response message
 	 * @param {Object} answer The answered message of user
+	 * @param {Object} client The client object
 	 */
 	execute(message, answer, client) {
-        console.log("SEARCH COMPLETED")
+		console.log("SEARCH COMPLETED")
 	},
 };
