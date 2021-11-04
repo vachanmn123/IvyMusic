@@ -20,7 +20,7 @@ const { MessageEmbed } = require('discord.js');
             .setColor('#0099ff')
             .setTitle(`Added playlist [${playlist.name}](${playlist.url})`)
             .setDescription(`${playlist.tracks.length} tracks added`)
-            .addField('Number of songs', playlist.songs.length)
+            .addField('Number of songs in queue:', `queue.songs.length`)
             .setFooter(`Added by ${playlist.owner}`)
             .setTimestamp();
         queue.textChannel.send({ embeds: [embed] });
