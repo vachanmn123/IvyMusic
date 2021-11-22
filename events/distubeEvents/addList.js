@@ -16,11 +16,17 @@ const { MessageEmbed } = require('discord.js');
 	 * @param {Object} client Main Application Client
 	 */
 	execute(queue, playlist, client) {
+	let playlistLength = null
+	try{
+		playlistLength = playlist.tracks.length;
+	}
+	catch(e) {
+		playlistLength = "a few"
+	}
         const embed = new MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`Added playlist [${playlist.name}](${playlist.url})`)
-            .setDescription(`${playlist.tracks.length} tracks added`)
-            .addField('Number of songs in queue:', `queue.songs.length`)
+            .setDescription(`${playlistLength} tracks added`)
             .setFooter(`Added by ${playlist.owner}`)
             .setTimestamp();
         queue.textChannel.send({ embeds: [embed] });

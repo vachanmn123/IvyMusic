@@ -1,8 +1,10 @@
 /**
  * @file Ready Event File.
- * @author Naman Vrati
+ * @author Vachan MN
  * @since 1.0.0
  */
+const fs = require("fs");
+const Database = require("../db");
 
 module.exports = {
 	name: "ready",
@@ -17,5 +19,6 @@ module.exports = {
 			type: "PLAYING",
 		});
 		console.log(`Ready! Logged in as ${client.user.tag}`);
+		client.db = new Database("./db", client);
 	},
 };

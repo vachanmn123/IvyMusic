@@ -36,6 +36,7 @@ const client = new Client({
 const eventFiles = fs
 	.readdirSync("./events")
 	.filter((file) => file.endsWith(".js"));
+﻿
 
 // Loop through all files and execute the event when it is actually emmited.
 for (const file of eventFiles) {
@@ -272,6 +273,8 @@ for (const file of distubeEventFiles) {
 		);
 	}
 }
+
+
 
 // Login into your client application with bot's token.
 
