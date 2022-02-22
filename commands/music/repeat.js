@@ -19,6 +19,7 @@ module.exports = {
         const queue = client.distube.getQueue(message)
         if (!queue) return message.channel.send(`There is nothing playing!`)
         let mode = null
+	if (!args[0]) return await message.reply("Please use the command properly, use the help command");
         switch (args[0]) {
             case "off":
                 mode = 0
