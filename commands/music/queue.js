@@ -16,7 +16,8 @@ module.exports = {
 	execute(message, args) {
         const queue = message.client.distube.getQueue(message)
         if (!queue) return message.channel.send(`There is nothing playing!`)
-        const q = queue.songs.map((song, i) => `${i === 0 ? "Playing:" : `${i}.`} ${song.name} - \`${song.formattedDuration}\``).join("\n")
+        let q = queue.songs.map((song, i) => `${i === 0 ? "Playing:" : `${i}.`} ${song.name} - \`${song.formattedDuration}\``).join("\n")
+        if (q.length >= 1020) q = `${q.slice(0, 1020)}...`
 		const embed = new MessageEmbed()
 			.setColor("#101010")
 			.setTitle("Queue")
